@@ -7,6 +7,7 @@
     <!-- 网站图标（内联 SVG） -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23176b50'/%3E%3Ctext x='32' y='45' font-size='34' text-anchor='middle' fill='white' font-family='Microsoft YaHei'%3E%E8%92%99%3C/text%3E%3C/svg%3E">
 
+<link rel="preload" as="image" href="landscape-water.jpg">
     <style>
         /* ==========================================================
            魅力蒙城 宣传网站 —— 整合版样式（内联）
@@ -500,13 +501,13 @@
                 <img src="landscape-water.jpg" alt="山水风景">
             </div>
             <div class="slide">
-                <img src="water.jpg" alt="水域风景">
+                <img src="water.jpg" alt="水域风景" loading="lazy">
             </div>
             <div class="slide">
-                <img src="eco-nature.jpg" alt="生态自然">
+                <img src="eco-nature.jpg" alt="生态自然" loading="lazy">
             </div>
             <div class="slide">
-                <img src="natural-scenery.jpg" alt="自然风光">
+                <img src="natural-scenery.jpg" alt="自然风光" loading="lazy">
             </div>
         </div>
 
@@ -549,19 +550,19 @@
         <div class="cards">
 
             <div class="card">
-                <img src="humanity.jpg" alt="人文生活">
+                <img src="humanity.jpg" alt="人文生活" loading="lazy">
                 <h3>人文生活</h3>
                 <p>蒙城人杰地灵、民风淳朴，庄子文化与楹联雅好代代相传，街头巷尾书香与烟火气交织。清晨一碗热气腾腾的sa汤，配上金黄酥脆的油酥烧饼，便是蒙城人最寻常的生活滋味。走进蒙城，便能感受到深厚的人文底蕴与温暖的人间气息。</p>
             </div>
 
             <div class="card">
-                <img src="city-development.jpg" alt="城市发展">
+                <img src="city-development.jpg" alt="城市发展" loading="lazy">
                 <h3>城市发展</h3>
                 <p>近年来，蒙城坚持高质量发展，城市建设日新月异：道路桥梁四通八达，教育医疗、商业配套不断完善，产业园区蓬勃发展，城乡面貌焕然一新。经济发展稳步向前的同时，蒙城注重生态与民生协同推进，努力打造宜居宜业的现代化城市，让每一位蒙城人共同见证家乡的崭新变化。</p>
             </div>
 
             <div class="card">
-                <img src="eco-scenery.jpg" alt="生态风光">
+                <img src="eco-scenery.jpg" alt="生态风光" loading="lazy">
                 <h3>生态风光</h3>
                 <p>蒙城地处平原，涡河两岸水清岸绿、沃野千里。城市公园与河畔绿地相互点缀，四季景色各有韵味：春日菜花烂漫，夏日绿荫蝉鸣，秋日稻浪翻金，冬日薄雾如纱。自然风光与城市生活和谐相融，尽显"城在景中、人在画中"的生态之美。</p>
             </div>
@@ -586,7 +587,7 @@
 
             <div class="text-box" id="zhuangziBox">
                 <h3>庄子文化</h3>
-                <img class="box-img" src="zhuangzi.jpg" alt="庄子雕像">
+                <img class="box-img" src="zhuangzi.jpg" alt="庄子雕像" loading="lazy">
                 <p class="img-note">庄子雕像</p>
                 <p>
                     蒙城与庄子文化有着深厚的联系，素有"庄子故里"之誉。相传庄子曾在此任漆园吏、著书立说，其思想源远流长。《逍遥游》《齐物论》等名篇以汪洋恣肆的笔触，阐述逍遥自在、顺应自然的哲学智慧，是中国传统文化的重要组成部分，对后世的哲学思想、文学艺术乃至生活方式产生了深远影响。今天的蒙城，仍以庄子文化为底蕴，让这份跨越两千余年的思想遗产生生不息。
@@ -602,7 +603,7 @@
 
             <div class="text-box" id="folkBox">
                 <h3>地方传统文化</h3>
-                <img class="box-img" src="folk-culture.jpg" alt="古街灯会">
+                <img class="box-img" src="folk-culture.jpg" alt="古街灯会" loading="lazy">
                 <p class="img-note">古街灯会 · 民俗节庆</p>
                 <p>
                     蒙城拥有丰富的地方民俗和传统文化资源。从年节庙会到婚丧嫁娶，从民间曲艺到传统手工艺，当地群众在长期的生产生活中形成了独具特色的文化传统。书法、楹联等雅好在蒙城蔚然成风，民间艺人代代相传，一粥一饭、一歌一曲之间，处处透着蒙城人质朴乐观的生活态度。
@@ -618,7 +619,7 @@
 
             <div class="text-box" id="inheritBox">
                 <h3>文化传承</h3>
-                <img class="box-img" src="heritage.jpg" alt="蒙城历史文化展厅">
+                <img class="box-img" src="heritage.jpg" alt="蒙城历史文化展厅" loading="lazy">
                 <p class="img-note">古蒙神韵 · 历史文化展厅</p>
                 <p>
                     保护历史文化资源、传承优秀传统文化，是蒙城文化建设的重要内容。当地持续加强对庄子文化、民俗技艺和古建遗存的整理与保护，推动传统文化进校园、进社区，让更多年轻人了解蒙城的历史与城市魅力，让优秀传统文化在新时代焕发新的生机。
@@ -644,19 +645,19 @@
         <div class="cards">
 
             <div class="card">
-                <img src="nature-scenery.jpg" alt="自然景观">
+                <img src="nature-scenery.jpg" alt="自然景观" loading="lazy">
                 <h3>自然景观</h3>
                 <p>蒙城地处淮北平原，地势平坦开阔，田园风光秀美。涡河等河流穿行其间，两岸良田沃野、村庄错落，春夏麦浪起伏、绿意盎然，金秋稻谷飘香、一派丰收景象。漫步乡间小道，远离喧嚣，感受宁静悠闲的田园生活氛围，别有一番惬意。</p>
             </div>
 
             <div class="card">
-                <img src="cityscape.jpg" alt="城市景观">
+                <img src="cityscape.jpg" alt="城市景观" loading="lazy">
                 <h3>城市景观</h3>
                 <p>今天的蒙城，城市建设日新月异。宽阔整洁的街道、鳞次栉比的楼宇、绿意盎然的公园广场，共同勾勒出城市发展的新面貌；城内的宋代万佛古塔静静矗立，见证着岁月的沧桑与城市的蜕变。夜幕降临，华灯初上，城市轮廓倒映在涡河水面，动静之间尽显现代城市的活力与温情。</p>
             </div>
 
             <div class="card">
-                <img src="natural-scenery-2.jpg" alt="自然风光">
+                <img src="natural-scenery-2.jpg" alt="自然风光" loading="lazy">
                 <h3>自然风光</h3>
                 <p>蒙城四季分明，自然风光各具韵味：春日菜花金黄烂漫，夏日河畔绿柳成荫，秋日天高云淡、稻浪翻金，冬日薄雾轻笼、别有诗情。优美的生态环境与城市生活相得益彰，让人们在繁忙之余也能亲近自然，体验生态之美。</p>
             </div>
