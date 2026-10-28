@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>魅力蒙城 - 最终完成结果</title>
+    <!-- 网站图标（内联 SVG） -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23176b50'/%3E%3Ctext x='32' y='45' font-size='34' text-anchor='middle' fill='white' font-family='Microsoft YaHei'%3E%E8%92%99%3C/text%3E%3C/svg%3E">
+
+    <style>
+        /* ==========================================================
+           魅力蒙城 宣传网站 —— 整合版样式（内联）
+           覆盖：全局样式 / 导航 / 滚动条 / 轮播图 / 卡片 / 列表
+                 / 表格 / 文本框 / 表单 / 留言墙 / 页脚 / 响应式
+           ========================================================== */
+
+        /* ---------- 1. 全局样式与盒子模型 ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* 盒子模型：元素宽高包含内边距与边框 */
+        }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 加分项：网站背景（柔和渐变背景） */
+            background: linear-gradient(160deg, #f5f7f4 0%, #e7f0ea 100%);
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ---------- 2. 顶部导航（flex 布局） ---------- */
+        header {
+            background: #176b50;
+            color: #fff;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #siteLogo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #fff;
+            cursor: pointer;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ffdf8b;
+        }
+
+        /* ---------- 3. 页面切换（单文件多页面） ---------- */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* ---------- 4. 公告滚动条（文字滚动效果） ---------- */
+        #noticeBar {
+            background: #ffdf8b;
+            color: #164c3b;
+            padding: 8px 0;
+            font-size: 15px;
+        }
+
+        /* ---------- 5. 首页轮播图 ---------- */
+        #banner {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            background: #ddd;
+        }
+
+        .slides {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transition: opacity 0.8s;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-text {
+            position: absolute;
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            z-index: 2;
+            text-shadow: 2px 2px 5px #333;
+        }
+
+        .banner-text h1 {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .banner-text p {
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 45%;
+            z-index: 3;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            border: none;
+            font-size: 32px;
+            padding: 10px 16px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 4;
+        }
+
+        .dot {
+            width: 13px;
+            height: 13px;
+            border: none;
+            border-radius: 50%;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #ffdf8b;
+        }
+
+        /* ---------- 6. 内容区域 ---------- */
+        .container {
+            width: 84%;
+            margin: 45px auto;
+        }
+
+        .title {
+            text-align: center;
+            color: #176b50;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .sub-title {
+            text-align: center;
+            color: #176b50;
+            font-size: 22px;
+            margin: 40px 0 20px;
+        }
+
+        .intro {
+            text-align: center;
+            color: #666;
+            line-height: 2;
+            margin-bottom: 35px;
+        }
+
+        /* ---------- 7. 名片列表（无序列表） ---------- */
+        #introList {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        #introList li {
+            background: #fff;
+            border: 1px solid #cfe3d9;
+            border-radius: 20px;
+            padding: 6px 18px;
+            color: #176b50;
+            font-size: 15px;
+        }
+
+        /* ---------- 8. 卡片布局（CSS 网格布局） ---------- */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            display: block;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            color: #176b50;
+            margin: 18px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.8;
+            margin: 0 18px 22px;
+        }
+
+        /* ---------- 9. 文本框（flex 布局） ---------- */
+        .text-boxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .text-box {
+            flex: 1 1 280px;
+            background: #fff;
+            padding: 30px;
+            line-height: 2;
+            border-radius: 8px;
+        }
+
+        .text-box h3 {
+            color: #176b50;
+            margin-bottom: 10px;
+        }
+
+        .box-img {
+            display: block;
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            background: #eef4f0;
+            border-radius: 8px;
+            margin: 12px 0 6px;
+        }
+
+        .img-note {
+            text-align: center;
+            color: #9aa7a0;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .text-box ol,
+        .text-box ul {
+            margin: 10px 0 0 22px;
+            color: #666;
+        }
+
+        /* ---------- 10. 表格（含跨行跨列合并） ---------- */
+        #infoTable {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            margin: 0 auto 25px;
+        }
+
+        #infoTable th,
+        #infoTable td {
+            border: 1px solid #cfe3d9;
+            padding: 12px 14px;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        #infoTable th {
+            background: #176b50;
+            color: #fff;
+        }
+
+        #infoTable td {
+            color: #555;
+        }
+
+        /* ---------- 11. 留言表单 ---------- */
+        #messageForm {
+            width: 600px;
+            max-width: 100%;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #cfe3d9;
+        }
+
+        #messageForm label {
+            display: block;
+            margin-top: 14px;
+            color: #176b50;
+            font-weight: bold;
+        }
+
+        #messageForm input[type="text"],
+        #messageForm input[type="password"],
+        #messageForm select,
+        #messageForm textarea,
+        #messageForm input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #messageForm textarea {
+            height: 130px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin: 8px 0 4px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 0;
+            font-weight: normal;
+            color: #555;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .submit {
+            background: #176b50;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .reset {
+            background: #9aa7a0;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* ---------- 12. 留言墙 ---------- */
+        .wall {
+            background: #fff;
+            border-radius: 8px;
+            padding: 25px 30px;
+            margin-top: 30px;
+        }
+
+        .wall ul {
+            list-style: none;
+        }
+
+        .wall li {
+            line-height: 2;
+            color: #666;
+            padding: 6px 0;
+            border-bottom: 1px dashed #e3ece7;
+        }
+
+        /* ---------- 13. 页脚 ---------- */
+        footer {
+            background: #164c3b;
+            color: #fff;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+            line-height: 2;
+        }
+
+        /* ---------- 14. 响应式适配（窄屏手机） ---------- */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 5%;
+            }
+
+            nav {
+                gap: 16px;
+            }
+
+            #banner {
+                height: 320px;
+            }
+
+            .banner-text h1 {
+                font-size: 28px;
+            }
+
+            .banner-text p {
+                font-size: 16px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .text-boxes {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ===== 顶部导航栏（子页面之间通过超链接相互跳转） ===== -->
+<header>
+    <div id="siteLogo">魅力蒙城</div>
+    <nav>
+        <a href="#home" class="active" onclick="showPage('home', this); return false;">网站首页</a>
+        <a href="#culture" onclick="showPage('culture', this); return false;">历史文化</a>
+        <a href="#scenery" onclick="showPage('scenery', this); return false;">风景名胜</a>
+        <a href="#message" onclick="showPage('message', this); return false;">互动留言</a>
+    </nav>
+</header>
+
+<!-- ===== 公告滚动条（加分项：文字滚动效果） ===== -->
+<div id="noticeBar">
+    <marquee direction="left" scrollamount="4">欢迎来到魅力蒙城宣传网站！感受千年庄周遗韵，品味涡河两岸风物，欢迎留言互动。—— 魅力蒙城欢迎您！</marquee>
+</div>
+
+<!-- =====================================================
+     页面一：网站首页
+     ===================================================== -->
+<section id="home" class="page active">
+
+    <!-- 首页轮播图（加分项：轮播图） -->
+    <div id="banner">
+        <div class="slides">
+            <div class="slide active">
+                <img src="landscape-water.jpg" alt="山水风景">
+            </div>
+            <div class="slide">
+                <img src="water.jpg" alt="水域风景">
+            </div>
+            <div class="slide">
+                <img src="eco-nature.jpg" alt="生态自然">
+            </div>
+            <div class="slide">
+                <img src="natural-scenery.jpg" alt="自然风光">
+            </div>
+        </div>
+
+        <div class="banner-text">
+            <h1>魅力蒙城 · 宜居宜游</h1>
+            <p>走进安徽亳州蒙城，感受千年庄周遗韵，品味涡河两岸风物，欣赏自然风光与城市新貌。</p>
+        </div>
+
+        <button class="arrow prev" onclick="changeSlide(-1)">&lsaquo;</button>
+        <button class="arrow next" onclick="changeSlide(1)">&rsaquo;</button>
+
+        <div class="dots">
+            <button class="dot active" onclick="goSlide(0)"></button>
+            <button class="dot" onclick="goSlide(1)"></button>
+            <button class="dot" onclick="goSlide(2)"></button>
+            <button class="dot" onclick="goSlide(3)"></button>
+        </div>
+    </div>
+
+    <!-- 认识蒙城 -->
+    <div class="container">
+        <h2 class="title">认识蒙城</h2>
+
+        <p class="intro">
+            蒙城县位于安徽省西北部，隶属于亳州市，地处淮北平原腹地，涡河穿城而过。
+            这里历史悠久、文化底蕴深厚，因与庄子文化渊源深厚而素有"庄子故里"之誉。
+            千百年岁月沉淀出独特的民俗风情与人文气质，近年来城市面貌日新月异，
+            生态风光优美宜人，是一座古老与现代交融、充满活力的城市。
+        </p>
+
+        <!-- 无序列表：蒙城名片 -->
+        <ul id="introList">
+            <li>淮北平原 · 涡河穿城</li>
+            <li>庄子故里 · 文化名城</li>
+            <li>万佛古塔 · 千年见证</li>
+            <li>生态宜居 · 活力之城</li>
+        </ul>
+
+        <!-- 图文卡片模块 -->
+        <div class="cards">
+
+            <div class="card">
+                <img src="humanity.jpg" alt="人文生活">
+                <h3>人文生活</h3>
+                <p>蒙城人杰地灵、民风淳朴，庄子文化与楹联雅好代代相传，街头巷尾书香与烟火气交织。清晨一碗热气腾腾的sa汤，配上金黄酥脆的油酥烧饼，便是蒙城人最寻常的生活滋味。走进蒙城，便能感受到深厚的人文底蕴与温暖的人间气息。</p>
+            </div>
+
+            <div class="card">
+                <img src="city-development.jpg" alt="城市发展">
+                <h3>城市发展</h3>
+                <p>近年来，蒙城坚持高质量发展，城市建设日新月异：道路桥梁四通八达，教育医疗、商业配套不断完善，产业园区蓬勃发展，城乡面貌焕然一新。经济发展稳步向前的同时，蒙城注重生态与民生协同推进，努力打造宜居宜业的现代化城市，让每一位蒙城人共同见证家乡的崭新变化。</p>
+            </div>
+
+            <div class="card">
+                <img src="eco-scenery.jpg" alt="生态风光">
+                <h3>生态风光</h3>
+                <p>蒙城地处平原，涡河两岸水清岸绿、沃野千里。城市公园与河畔绿地相互点缀，四季景色各有韵味：春日菜花烂漫，夏日绿荫蝉鸣，秋日稻浪翻金，冬日薄雾如纱。自然风光与城市生活和谐相融，尽显"城在景中、人在画中"的生态之美。</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     页面二：历史文化
+     ===================================================== -->
+<section id="culture" class="page">
+    <div class="container">
+        <h2 class="title">历史文化</h2>
+
+        <p class="intro">
+            蒙城历史悠久，人文荟萃，因庄子文化而闻名，民俗风情浓郁，文化遗存丰富，是一座底蕴深厚的文化之城。
+        </p>
+
+        <!-- 三个文本框，使用 flex 布局 -->
+        <div class="text-boxes">
+
+            <div class="text-box" id="zhuangziBox">
+                <h3>庄子文化</h3>
+                <img class="box-img" src="zhuangzi.jpg" alt="庄子雕像">
+                <p class="img-note">庄子雕像</p>
+                <p>
+                    蒙城与庄子文化有着深厚的联系，素有"庄子故里"之誉。相传庄子曾在此任漆园吏、著书立说，其思想源远流长。《逍遥游》《齐物论》等名篇以汪洋恣肆的笔触，阐述逍遥自在、顺应自然的哲学智慧，是中国传统文化的重要组成部分，对后世的哲学思想、文学艺术乃至生活方式产生了深远影响。今天的蒙城，仍以庄子文化为底蕴，让这份跨越两千余年的思想遗产生生不息。
+                </p>
+                <!-- 有序列表：庄子名篇 -->
+                <ol>
+                    <li>《逍遥游》—— 追求精神的绝对自由</li>
+                    <li>《齐物论》—— 万物齐一的哲学思辨</li>
+                    <li>《养生主》—— 顺其自然的养生智慧</li>
+                    <li>《秋水》—— 河伯望洋的寓言启发</li>
+                </ol>
+            </div>
+
+            <div class="text-box" id="folkBox">
+                <h3>地方传统文化</h3>
+                <img class="box-img" src="folk-culture.jpg" alt="古街灯会">
+                <p class="img-note">古街灯会 · 民俗节庆</p>
+                <p>
+                    蒙城拥有丰富的地方民俗和传统文化资源。从年节庙会到婚丧嫁娶，从民间曲艺到传统手工艺，当地群众在长期的生产生活中形成了独具特色的文化传统。书法、楹联等雅好在蒙城蔚然成风，民间艺人代代相传，一粥一饭、一歌一曲之间，处处透着蒙城人质朴乐观的生活态度。
+                </p>
+                <!-- 无序列表：民俗文化 -->
+                <ul>
+                    <li>年节庙会：热闹喜庆的民俗集会</li>
+                    <li>民间曲艺：说唱艺术代代相传</li>
+                    <li>传统手工艺：匠心技艺历久弥新</li>
+                    <li>楹联书法：墨香雅韵蔚然成风</li>
+                </ul>
+            </div>
+
+            <div class="text-box" id="inheritBox">
+                <h3>文化传承</h3>
+                <img class="box-img" src="heritage.jpg" alt="蒙城历史文化展厅">
+                <p class="img-note">古蒙神韵 · 历史文化展厅</p>
+                <p>
+                    保护历史文化资源、传承优秀传统文化，是蒙城文化建设的重要内容。当地持续加强对庄子文化、民俗技艺和古建遗存的整理与保护，推动传统文化进校园、进社区，让更多年轻人了解蒙城的历史与城市魅力，让优秀传统文化在新时代焕发新的生机。
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- =====================================================
+     页面三：风景名胜
+     ===================================================== -->
+<section id="scenery" class="page">
+    <div class="container">
+        <h2 class="title">风景名胜</h2>
+
+        <p class="intro">
+            蒙城风光秀丽，既有恬静的田园自然景观，也有蓬勃的现代城市风貌，一城之内古今交融、动静相宜。
+        </p>
+
+        <!-- 图文卡片模块 -->
+        <div class="cards">
+
+            <div class="card">
+                <img src="nature-scenery.jpg" alt="自然景观">
+                <h3>自然景观</h3>
+                <p>蒙城地处淮北平原，地势平坦开阔，田园风光秀美。涡河等河流穿行其间，两岸良田沃野、村庄错落，春夏麦浪起伏、绿意盎然，金秋稻谷飘香、一派丰收景象。漫步乡间小道，远离喧嚣，感受宁静悠闲的田园生活氛围，别有一番惬意。</p>
+            </div>
+
+            <div class="card">
+                <img src="cityscape.jpg" alt="城市景观">
+                <h3>城市景观</h3>
+                <p>今天的蒙城，城市建设日新月异。宽阔整洁的街道、鳞次栉比的楼宇、绿意盎然的公园广场，共同勾勒出城市发展的新面貌；城内的宋代万佛古塔静静矗立，见证着岁月的沧桑与城市的蜕变。夜幕降临，华灯初上，城市轮廓倒映在涡河水面，动静之间尽显现代城市的活力与温情。</p>
+            </div>
+
+            <div class="card">
+                <img src="natural-scenery-2.jpg" alt="自然风光">
+                <h3>自然风光</h3>
+                <p>蒙城四季分明，自然风光各具韵味：春日菜花金黄烂漫，夏日河畔绿柳成荫，秋日天高云淡、稻浪翻金，冬日薄雾轻笼、别有诗情。优美的生态环境与城市生活相得益彰，让人们在繁忙之余也能亲近自然，体验生态之美。</p>
+            </div>
+
+        </div>
+
+        <!-- 表格：景点信息一览（含单元格跨行 rowspan / 跨列 colspan 合并） -->
+        <h3 class="sub-title">景点信息一览</h3>
+        <table id="infoTable">
+            <tr>
+                <th colspan="4">蒙城主要景点信息一览</th>
+            </tr>
+            <tr>
+                <th>类别</th>
+                <th>景点名称</th>
+                <th>特色看点</th>
+                <th>最佳游览季节</th>
+            </tr>
+            <tr>
+                <td rowspan="2">历史古迹</td>
+                <td>万佛塔</td>
+                <td>宋代砖塔，静静见证千年沧桑</td>
+                <td>四季皆宜</td>
+            </tr>
+            <tr>
+                <td>庄子祠</td>
+                <td>纪念庄子的文化殿堂</td>
+                <td>春秋两季</td>
+            </tr>
+            <tr>
+                <td rowspan="2">自然风光</td>
+                <td>涡河两岸</td>
+                <td>水清岸绿，田园风光秀美</td>
+                <td>春夏两季</td>
+            </tr>
+            <tr>
+                <td>田野乡间</td>
+                <td>麦浪稻花，四季景致分明</td>
+                <td>春秋两季</td>
+            </tr>
+            <tr>
+                <td colspan="4">温馨提示：以上景点均位于蒙城县境内，欢迎实地游览体验。</td>
+            </tr>
+        </table>
+
+    </div>
+</section>
+
+<!-- =====================================================
+     页面四：互动留言（独立表单页）
+     ===================================================== -->
+<section id="message" class="page">
+    <div class="container">
+        <h2 class="title">互动留言</h2>
+
+        <p class="intro">
+            欢迎留下你对蒙城的印象、建议与美好祝福，让我们一同为蒙城的发展献计献策。
+        </p>
+
+        <!-- 表单：账号、密码、性别、下拉选择框、复选框、文件上传、多行文本域、提交、重置 -->
+        <form id="messageForm" action="#" method="post">
+            <h3 class="sub-title">填写留言</h3>
+
+            <label for="username">姓名</label>
+            <input type="text" id="username" name="username" placeholder="请输入姓名" required>
+
+            <label for="account">账号</label>
+            <input type="text" id="account" name="account" placeholder="请输入登录账号" required>
+
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password" placeholder="请输入密码" required>
+
+            <label>性别</label>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="男"> 男</label>
+                <label><input type="radio" name="gender" value="女"> 女</label>
+            </div>
+
+            <label for="fromPlace">您来自哪里</label>
+            <select id="fromPlace" name="fromPlace">
+                <option value="本地">蒙城本地</option>
+                <option value="省内">安徽省内</option>
+                <option value="省外">省外</option>
+                <option value="海外">海外</option>
+            </select>
+
+            <label>感兴趣的内容（可多选）</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="interest" value="文化"> 历史文化</label>
+                <label><input type="checkbox" name="interest" value="旅游"> 风景旅游</label>
+                <label><input type="checkbox" name="interest" value="美食"> 特色美食</label>
+                <label><input type="checkbox" name="interest" value="发展"> 城市发展</label>
+            </div>
+
+            <label for="photo">上传图片</label>
+            <input type="file" id="photo" name="photo">
+
+            <label for="content">留言内容</label>
+            <textarea id="content" name="content" placeholder="请输入留言内容" required></textarea>
+
+            <div class="form-buttons">
+                <button class="submit" type="submit">提交留言</button>
+                <button class="reset" type="reset">重置</button>
+            </div>
+        </form>
+
+        <!-- 留言墙：无序列表 -->
+        <div class="wall">
+            <h3 class="sub-title">精选留言</h3>
+            <ul>
+                <li>游客小李：蒙城的庄子文化让我印象深刻，值得一游！</li>
+                <li>本地居民：家乡越来越美，为蒙城点赞。</li>
+                <li>摄影爱好者：涡河两岸的日落太出片了。</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer>
+    <p>魅力蒙城 · 安徽省亳州市蒙城县</p>
+    <p>了解蒙城，发现蒙城，宣传蒙城</p>
+</footer>
+
+<!-- ===== 页面脚本 ===== -->
+<script>
+// ---------- 页面切换（超链接跳转对应页面） ----------
+function showPage(pageId, navLink) {
+    document.querySelectorAll('.page').forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    document.querySelectorAll('nav a').forEach(function(link) {
+        link.classList.remove('active');
+    });
+
+    navLink.classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+// ---------- 轮播图切换 ----------
+var currentSlide = 0;
+var slides = document.querySelectorAll('.slide');
+var dots = document.querySelectorAll('.dot');
+var timer;
+
+function goSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+
+    currentSlide = (index + slides.length) % slides.length;
+
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+
+function changeSlide(step) {
+    goSlide(currentSlide + step);
+    restartTimer();
+}
+
+function startTimer() {
+    timer = setInterval(function() {
+        goSlide(currentSlide + 1);
+    }, 3000);
+}
+
+function restartTimer() {
+    clearInterval(timer);
+    startTimer();
+}
+
+startTimer();
+
+// 鼠标移入轮播图暂停，移出继续
+var banner = document.querySelector('#banner');
+banner.addEventListener('mouseenter', function() {
+    clearInterval(timer);
+});
+banner.addEventListener('mouseleave', function() {
+    restartTimer();
+});
+
+// ---------- 留言提交 ----------
+document.getElementById('messageForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('留言提交成功！感谢你对蒙城的关注。');
+    this.reset();
+});
+</script>
+
+</body>
+</html>
